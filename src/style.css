@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 35px;
+  color: #2270cc;
+  border: 1px solid #2270cc;
+  background-color: transparent;
+  border-radius: 12px;
+  cursor: pointer;
+}
+/* Header CSS */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 60px;
+  background-color: #2270cc;
+  color: #ffffff;
+}
+
+header ul {
+  margin-left: 40px;
+  display: flex;
+}
+
+header ul li {
+  list-style-type: none;
+  padding: 0px 20px;
+  cursor: pointer;
+}
+
+header .link__class {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* Footer CSS */
+footer {
+  background-color: #2270cc;
+  color: #ffffff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0;
+  text-align: center;
+}
+
+/* Banner CSS */
+
+.banner__section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.banner__section .banner__text {
+  flex: 1;
+}
+.banner__section .banner__text h1 {
+  font-size: 28px;
+  color: #2270cc;
+  padding: 10px 0;
+}
+.banner__section .banner__text h3 {
+  font-size: 20px;
+  color: #000000;
+  padding: 10px 0;
+}
+.banner__section .banner__image {
+  flex: 1;
+}
+
+.contact {
+  max-width: 500px;
+  margin: auto;
+}
+
+.contact .input__section {
+  padding: 10px;
+}
+.contact label {
+  width: 100%;
+  display: block;
+  margin-bottom: 5px;
+}
+.contact input {
+  width: 100%;
+  padding: 3px;
+}
+.contact input[type='radio'] {
+  width: 20px;
+  padding: 3px;
+}
+.contact input[type='checkbox'] {
+  width: 20px;
+  padding: 3px;
+}
+
+.news__card__container {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  padding: 10px 10%;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+
+.news__card__container .news__card {
+  border: 1px solid #2270cc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.news__card__container .news__card .btn__sec {
+  display: flex;
+  justify-content: space-between;
+}
+
+.news__card__container .news__card img {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.news__card__container .news__card h3 {
+  font-size: 20px;
+  padding: 10px 0;
+}
+.news__card__container .news__card h5 {
+  font-size: 16px;
+  padding: 10px 0;
+}
