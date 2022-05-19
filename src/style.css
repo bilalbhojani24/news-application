@@ -98,3 +98,36 @@ footer {
 .contact .input__container input[type='radio'] {
   width: 20px;
 }
+
+.cards__container {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  padding: 10px 10%;
+  justify-content: space-between;
+  padding-bottom: 80px;
+}
+
+.cards__container .news__card {
+  border: 1px solid #2270cc;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 12px;
+}
+
+.cards__container .news__card h4,
+p {
+  padding: 10px 0;
+}
+.cards__container .news__card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.buttons__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+}

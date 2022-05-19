@@ -10,14 +10,21 @@
 
 
 
+API Communication has 4 things:-
+
+1. Method : get => used to get data (To get all TODOS)
+2. Methods : post => used to create something on server (create TODO)
+3. Method  : put => used to update existing data on server (update TODO)
+4. method : delete => used to delete the data on server (Delete TODO)
+5. mthod : patch => I dont know (similar to PUT method)
+
+fetch() => correct. (you can use) 
+
+axios => very famous very famous
 
 
-
-
-
-
-
-
+react reconciation engine => 
+1. components are store with unique id 
 
 
 

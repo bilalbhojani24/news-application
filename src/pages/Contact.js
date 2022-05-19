@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Button from '../components/Button';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
 import Layout from '../components/Layout';
 
 export class Contact extends Component {
