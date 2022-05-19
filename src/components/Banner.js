@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
 import BannerImage from '../images/banner.jpg';
-
+import Button from './Button';
 export class Banner extends Component {
   render() {
     return (
-      <div className="banner__section">
+      <div className="banner">
         <section className="banner__text">
-          <h1>THE YOUNG DEVELOPER Team</h1>
-          <h3>Best Developers of the Century :)</h3>
-          <button>Service</button>
+          <h2>Welcome To Taza Khabar</h2>
+          <h3>Some text....!!</h3>
+          {/* <Link to="/contact">Explore News</Link> */}
+          <Button buttonText="Explore News" />
         </section>
-        <section className="banner__image">
-          <img src={BannerImage} alt="" width="100%" />
+        <section className="banner__img">
+          <img src={BannerImage} alt="banner--logo" width="100%" />
         </section>
       </div>
     );

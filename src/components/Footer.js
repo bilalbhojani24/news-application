@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export class Footer extends Component {
   render() {
-    return <footer>News Application @news@gmail.com</footer>;
+    return <footer>TAZA KHABAR Available at {this.props.email}</footer>;
   }
 }
 

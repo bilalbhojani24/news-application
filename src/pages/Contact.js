@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 import Layout from '../components/Layout';
+
 export class Contact extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       fName: '',
       lName: '',
@@ -12,29 +15,51 @@ export class Contact extends Component {
       gender: '',
       interest: [],
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleInterestChange = this.handleInterestChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
+
   handleChange(e) {
-    console.log(e.target);
     this.setState({
       [e.target.name]: e.target.value,
     });
   }
+
   handleInterestChange(e) {
-    // if already exist then filter
+    // check if it already exist in interest array by using filter and then updated or delete
     this.setState({
-      interest: [...this.state.interest, e.target.value],
+      [e.target.name]: [...this.state.interest, e.target.value],
     });
   }
+
+  handleFormSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+    this.setState({
+      fName: '',
+      lName: '',
+      email: '',
+      mobile: '',
+      gender: '',
+      interest: [],
+    });
+  }
+
+  componentDidMount() {
+    document.addEventListener(
+      'keydown',
+      (e) => e.code === 'Enter' && console.log(this.state)
+    );
+  }
+
   render() {
-    const { fName, lName, email, mobile, gender, interest } = this.state;
+    const { fName, lName, email, mobile } = this.state;
     console.log(this.state);
     return (
       <Layout>
-        <div className="contact">
-          <section className="input__section">
+        <form className="contact" onSubmit={this.handleFormSubmit}>
+          <section className="input__container">
             <label>First Name</label>
             <input
               type="text"
@@ -43,7 +68,7 @@ export class Contact extends Component {
               onChange={this.handleChange}
             />
           </section>
-          <section className="input__section">
+          <section className="input__container">
             <label>Last Name</label>
             <input
               type="text"
@@ -52,7 +77,7 @@ export class Contact extends Component {
               onChange={this.handleChange}
             />
           </section>
-          <section className="input__section">
+          <section className="input__container">
             <label>Mobile Number</label>
             <input
               type="text"
@@ -61,62 +86,67 @@ export class Contact extends Component {
               onChange={this.handleChange}
             />
           </section>
-          <section className="input__section">
+          <section className="input__container">
             <label>Email</label>
             <input
-              type="text"
+              type="email"
               value={email}
               name="email"
               onChange={this.handleChange}
             />
           </section>
-          <section className="input__section">
+          <section className="input__container">
             <label>Gender</label>
             <input
               type="radio"
-              value="male"
               name="gender"
+              value="male"
               onChange={this.handleChange}
-            />
+            />{' '}
             Male
             <input
               type="radio"
-              value="female"
               name="gender"
+              value="female"
               onChange={this.handleChange}
             />
             Female
+            <input
+              type="radio"
+              name="gender"
+              value="other"
+              onChange={this.handleChange}
+            />
+            Other
           </section>
-          <section className="input__section">
+          <section className="input__container">
             <label>Interest</label>
             <input
               type="checkbox"
+              name="interest"
               value="Football"
               onChange={this.handleInterestChange}
-            />{' '}
+            />
             Football
             <input
               type="checkbox"
+              name="interest"
               value="Cricket"
               onChange={this.handleInterestChange}
-            />{' '}
+            />
             Cricket
             <input
               type="checkbox"
-              value="Others"
+              name="interest"
+              value="other"
               onChange={this.handleInterestChange}
-            />{' '}
+            />
             Others
           </section>
-          <section className="input__section">
-            <Button
-              buttonText="Submit"
-              onClick={() => {
-                console.log(this.state);
-              }}
-            />
+          <section className="input__container">
+            <Button buttonText="Submit Contact" type="submit" />
           </section>
-        </div>
+        </form>
       </Layout>
     );
   }

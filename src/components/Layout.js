@@ -1,15 +1,16 @@
-import React from 'react';
-import Footer from './Footer';
+import React, { Component } from 'react';
 import Header from './Header';
-
-const Layout = (props) => {
-  return (
-    <>
-      <Header />
-      {props.children}
-      <Footer />
-    </>
-  );
-};
+import Footer from './Footer';
+export class Layout extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Header />
+        {this.props.children}
+        <Footer email="custom@gmail.com" />
+      </React.Fragment>
+    );
+  }
+}
 
 export default Layout;
