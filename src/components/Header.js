@@ -6,7 +6,7 @@ export class Header extends Component {
       <header>
         <h1>
           <Link style={{ color: 'white', textDecoration: 'none' }} to="/">
-            TAZA KHABAR
+            TAZA KHABAsjdfjsbdfjhsdfh
           </Link>
         </h1>
         <ul>

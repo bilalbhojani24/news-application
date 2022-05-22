@@ -1,101 +1,92 @@
-import React, { Component } from 'react';
-import Layout from '../components/Layout';
-import axios from 'axios';
-import Card from '../components/Card';
+import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
+import Layout from '../components/Layout';
+import Card from '../components/Card';
+import axios from 'axios';
 
-export class NewsPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-      data: [],
-      error: false,
-      page: this.props.page,
-    };
-  }
+const NewsPage = (props) => {
+  const [counter, setCounter] = useState(0);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [page, setPage] = useState(props.page);
 
-  async getTopheadlines() {
-    this.setState({ loading: true });
+  async function getTopheadlines() {
+    setLoading(true);
     const response = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${process.env.REACT_APP_API_KEY}&page=${this.state.page}&pageSize=${this.props.pageSize}`
+      `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${process.env.REACT_APP_API_KEY}&page=${page}&pageSize=${props.pageSize}`
     );
 
     if (response.data.status === 'ok') {
-      this.setState({
-        loading: false,
-        data: response.data.articles,
-        error: false,
-      });
+      setLoading(false);
+      setData(response.data.articles);
     } else {
-      this.setState({
-        loading: false,
-        data: [],
-        error: true,
-      });
+      setLoading(false);
+      setError(true);
     }
   }
 
-  componentDidMount() {
-    this.getTopheadlines();
-    document.title = `Taza Khabar - ${this.props.category}`;
-  }
+  //   useEffect(() => {
+  //     console.log('Component Mounted', counter);
+  //   }, []); // useless
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps && prevProps.category !== this.props.category) {
-      this.getTopheadlines();
-    }
+  //   useEffect(() => {
+  //     // if else switch eatever conditions and based on that make API call, subscrubtion or perform side effects
+  //     console.log('Component Updated', counter);
+  //   }, [counter]);
 
-    if (prevState.page !== this.state.page) {
-      this.getTopheadlines();
-    }
-  }
+  useEffect(() => {
+    getTopheadlines();
+  }, [page]);
 
-  render() {
-    const { loading, data, error, page } = this.state;
-    console.log(page);
-    if (error) {
-      return <h2>Error! Something went wrong...</h2>;
-    }
-    return (
-      <Layout>
+  return (
+    <Layout>
+      {/* <h1>{counter}</h1>
+      <button onClick={() => setCounter(counter + 1)}>Increement</button>
+      <button onClick={() => setCounter(counter - 1)}>Decreement</button> */}
+      <h1 style={{ textAlign: 'center', padding: '10px 0' }}>
+        News for {props.category}
+      </h1>
+      {loading && data.length <= 0 && <h4>Loading...</h4>}
+      <div className="buttons__nav">
+        <Button
+          buttonText="Previos"
+          onClick={() => {
+            setPage(1);
+          }}
+        />
+        <Button
+          buttonText="Next"
+          onClick={() => {
+            setPage(1);
+          }}
+        />
+      </div>
+      {!loading && data.length === 0 && (
         <h1 style={{ textAlign: 'center', padding: '10px 0' }}>
-          News for {this.props.category}
+          No Data Found...
         </h1>
-        {loading && data.length <= 0 && <h4>Loading...</h4>}
-        <div className="buttons__nav">
-          <Button
-            buttonText="Previos"
-            onClick={() => {
-              this.setState({ page: page - 1 });
-            }}
+      )}
+      <section className="cards__container">
+        {data.map((n) => (
+          <Card
+            key={n.publishedAt}
+            imgUrl={n.urlToImage}
+            title={n.title}
+            description={n.description}
+            url={n.url}
           />
-          <Button
-            buttonText="Next"
-            onClick={() => {
-              this.setState({ page: page + 1 });
-            }}
-          />
-        </div>
-        {!loading && data.length === 0 && (
-          <h1 style={{ textAlign: 'center', padding: '10px 0' }}>
-            No Data Found...
-          </h1>
-        )}
-        <section className="cards__container">
-          {data.map((n) => (
-            <Card
-              key={n.publishedAt}
-              imgUrl={n.urlToImage}
-              title={n.title}
-              description={n.description}
-              url={n.url}
-            />
-          ))}
-        </section>
-      </Layout>
-    );
-  }
-}
+        ))}
+      </section>
+    </Layout>
+  );
+};
 
 export default NewsPage;
+
+// 1. With empty dependency array useEffect will run only once => reploicated as componentDidMount
+// 2. With something in dependency array it will run once on mount AND whenever value of depeddency array is changed
+// 1 & 2. With something in dependency array or empty dependency on mount useEffect will run once.
+
+// [page = 1] => onMount
+// prevVal = 1 && currVal = 1 ?? NO
